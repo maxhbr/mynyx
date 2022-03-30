@@ -1,0 +1,3 @@
+[submodule "submodules/nyx-kb"]
+	path = submodules/nyx-kb
+	url = https://github.com/tadfisher/nyx-kb

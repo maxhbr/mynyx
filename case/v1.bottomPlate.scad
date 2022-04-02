@@ -1,6 +1,7 @@
 side="left"; // ["left","right"]
 
 module bottomPlate(mirror=false) {
+    mirror(mirror ? [1,0,0] : [0,0,0])
     translate([0,0,-4 - 1.6]) {
         difference() {
             union() {

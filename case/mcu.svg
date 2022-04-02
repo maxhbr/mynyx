@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="166.00012mm"
+   height="152.75101mm"
+   viewBox="0 0 166.00012 152.75101"
+   version="1.1"
+   id="svg891"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="mcu.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs885" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7071068"
+     inkscape:cx="68.589356"
+     inkscape:cy="253.85133"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     fit-margin-top="-0.05"
+     fit-margin-left="-0.05"
+     fit-margin-right="-0.05"
+     fit-margin-bottom="-0.05"
+     inkscape:window-width="1244"
+     inkscape:window-height="1376"
+     inkscape:window-x="1940"
+     inkscape:window-y="20"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:pagecheckerboard="0" />
+  <metadata
+     id="metadata888">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Bottom"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline"
+     transform="translate(1.0000748,1.000855)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Plate"
+     style="display:inline" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="MCU"
+     style="display:inline">
+    <path
+       d="m 163.86503,23.864842 c 0.75851,0.756135 1.14552,1.767123 1.17193,2.828219 v 34.093855 c -0.0188,1.128814 -0.89949,1.945227 -1.9999,1.999897 H 140.5369 c -1.12568,-0.01838 -1.95139,-0.898613 -1.9999,-1.999897 V 15.108897 c 0.0204,-1.315707 1.21068,-2.187613 2.46909,-1.943805 l 14.93697,3.6068 c 0.72251,0.16954 1.35512,0.552682 1.88877,1.060097 z"
+       style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path1065"
+       sodipodi:nodetypes="ccccccccccc" />
+  </g>
+</svg>

@@ -6,7 +6,13 @@ module switchPlate() {
                     union() {
                         linear_extrude(height = 3, convexity = 10)
                             import (file = "./switch-boundary.svg");
+                        translate([0,0,1])
+                            linear_extrude(height = 2, convexity = 10)
+                            import (file = "./case-boundary.svg");
                     }
+
+                    linear_extrude(height = 3, convexity = 10)
+                        import (file = "./mcu.svg");
                     minkowski() {
                         union() {
                             linear_extrude(height = 1.5, convexity = 10)
@@ -35,6 +41,17 @@ module switchPlate() {
             import (file = "./switches.svg");
 
     }
+    difference() {
+        coneH=4;
+        minkowski() {
+            translate([0,0,-coneH/2])
+                linear_extrude(height = 10-coneH, center=true, convexity = 10)
+                import (file = "./case-boundary.svg");
+            cylinder(h=4, r1=5, r2=2);
+        }
+        linear_extrude(height = 10, center=true, convexity = 10)
+            import (file = "./case-boundary.svg");
+    }
 }
 
 module bottomPlate() {
@@ -48,5 +65,4 @@ module bottomPlate() {
     }
 }
 
-translate([0,0,0])
-    switchPlate();
+switchPlate();

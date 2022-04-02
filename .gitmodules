@@ -1,3 +1,6 @@
 [submodule "submodules/nyx-kb"]
 	path = submodules/nyx-kb
 	url = https://github.com/tadfisher/nyx-kb
+[submodule "submodules/horizon-kb"]
+	path = submodules/horizon-kb
+	url = https://github.com/tadfisher/horizon-kb

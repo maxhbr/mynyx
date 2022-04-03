@@ -1,6 +1,7 @@
 side="left"; // ["left","right"]
+shroud=true; // [true,false]
 
-module switchPlate(mirror=false) {
+module switchPlate(mirror=false,shroud=true) {
     mirror(mirror ? [1,0,0] : [0,0,0]) {
         difference() {
             union() {
@@ -9,8 +10,10 @@ module switchPlate(mirror=false) {
                         union() {
                             linear_extrude(height = 3, convexity = 10)
                                 import (file = "./svgs/switch-boundary.svg");
-                            linear_extrude(height = 3, convexity = 10)
-                                import (file = "./svgs/case-boundary.svg");
+                            if(shroud) {
+                                linear_extrude(height = 3, convexity = 10)
+                                    import (file = "./svgs/case-boundary.svg");
+                            }
                         }
 
                         linear_extrude(height = 3, convexity = 10)
@@ -43,20 +46,22 @@ module switchPlate(mirror=false) {
                 import (file = "./svgs/switches.svg");
 
         }
-        difference() {
-            coneH=4;
-            minkowski() {
-                translate([0,0,-coneH/2])
-                    linear_extrude(height = 10-coneH, center=true, convexity = 10)
+        if(shroud) {
+            difference() {
+                coneH=4;
+                minkowski() {
+                    translate([0,0,-coneH/2])
+                        linear_extrude(height = 10-coneH, center=true, convexity = 10)
+                        import (file = "./svgs/case-boundary.svg");
+                    cylinder(h=4, r1=2, r2=1);
+                }
+                linear_extrude(height = 10, center=true, convexity = 10)
                     import (file = "./svgs/case-boundary.svg");
-                cylinder(h=4, r1=2, r2=1);
             }
-            linear_extrude(height = 10, center=true, convexity = 10)
-                import (file = "./svgs/case-boundary.svg");
         }
     }
 }
 
-switchPlate(side != "left");
+switchPlate(side != "left", shroud);
 
 

@@ -62,6 +62,6 @@ module switchPlate(mirror=false,shroud=true) {
     }
 }
 
-switchPlate(side != "left", shroud);
+mirror($preview ? [0,0,0] : [0,0,1]) switchPlate(side != "left", shroud);
 
 

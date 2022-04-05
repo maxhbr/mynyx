@@ -1,18 +1,22 @@
-side="left"; // ["left","right"]
-shroud=true; // [true,false]
+var_variant="shrouded"; // ["shrouded", "plate", "no-thumb-cluster"]
+var_side="left"; // ["left","right"]
 
-module switchPlate(mirror=false,shroud=true) {
+module switchPlate(mirror=false,variant) {
     mirror(mirror ? [1,0,0] : [0,0,0]) {
         difference() {
             union() {
                 translate([0,0,2]) {
                     difference() {
                         union() {
-                            linear_extrude(height = 3, convexity = 10)
-                                import (file = "./svgs/switch-boundary.svg");
-                            if(shroud) {
+                            if(variant=="shrouded") {
                                 linear_extrude(height = 3, convexity = 10)
                                     import (file = "./svgs/case-boundary.svg");
+                            } else if (variant=="plate") {
+                                linear_extrude(height = 3, convexity = 10)
+                                    import (file = "./svgs/switch-boundary.svg");
+                            } else if (variant=="no-thumb-cluster") {
+                                linear_extrude(height = 3, convexity = 10)
+                                    import (file = "./svgs/switch-boundary-no-tc.svg");
                             }
                         }
 
@@ -46,7 +50,7 @@ module switchPlate(mirror=false,shroud=true) {
                 import (file = "./svgs/switches.svg");
 
         }
-        if(shroud) {
+        if(variant=="shrouded") {
             difference() {
                 coneH=4;
                 minkowski() {
@@ -62,6 +66,7 @@ module switchPlate(mirror=false,shroud=true) {
     }
 }
 
-mirror($preview ? [0,0,0] : [0,0,1]) switchPlate(side != "left", shroud);
+rotate($preview ? [0,0,0] : [180,0,0])
+    switchPlate(var_side != "left", variant=var_variant);
 
 

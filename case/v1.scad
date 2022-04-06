@@ -66,18 +66,18 @@ module switchPlate(mirror=false,variant,justMCUCutout=false) {
                             translate([0,0,-1])
                                 cylinder(r=1.7,h=1,$fn=20);
                         }
+                        linear_extrude(height = 5, convexity = 10)
+                            import (file = "./svgs/switches.svg");
                     }
                 }
                 minkowski() {
-                    linear_extrude(height = 4, convexity = 10)
+                    linear_extrude(height = 2, convexity = 10)
                         import (file = "./svgs/holes-no-mcu.svg");
-                    cylinder(r=1.5,h=1,$fn=20);
+                    cylinder(r1=1.5,r2=0.5,h=3,$fn=20);
                 }
             }
             linear_extrude(height = 5, convexity = 10)
                 import (file = "./svgs/holes-no-mcu.svg");
-            linear_extrude(height = 5, convexity = 10)
-                import (file = "./svgs/switches.svg");
             hull() {
                 for(t=[[-4,0,3],[4,0,3],[4,0,6],[-4,0,6]]) {
                     translate([151,143,1]+t)

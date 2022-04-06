@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="166.00012mm"
+   height="152.75101mm"
+   viewBox="0 0 166.00012 152.75101"
+   version="1.1"
+   id="svg891"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="tc-cutout.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs885" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="185.5"
+     inkscape:cy="407.49999"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     fit-margin-top="-0.05"
+     fit-margin-left="-0.05"
+     fit-margin-right="-0.05"
+     fit-margin-bottom="-0.05"
+     inkscape:window-width="1894"
+     inkscape:window-height="1376"
+     inkscape:window-x="2250"
+     inkscape:window-y="20"
+     inkscape:window-maximized="0"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-object-midpoints="true"
+     inkscape:pagecheckerboard="0" />
+  <metadata
+     id="metadata888">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Bottom"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline"
+     transform="translate(1.0000748,1.000855)">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 27.650285,112.12838 12.128134,-6.31008 c 10.196123,-0.11703 14.29875,-20.636671 24.294034,-20.573194 1.061105,0.0067 22.932142,-0.02282 22.932142,-0.02282 12.643804,-0.07402 -2.687636,11.425281 11.829344,11.751683 6.228871,0.06426 5.834351,-7.972922 15.555631,-8.467556 4.90612,-0.02079 12.89129,15.22757 33.33641,16.61296 v 0 l 17.63503,-0.27909 -0.50242,46.94866 -137.001085,-0.27461 z"
+       id="path7240"
+       sodipodi:nodetypes="ccsccccccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Plate"
+     style="display:inline" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="MCU"
+     style="display:inline" />
+</svg>

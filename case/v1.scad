@@ -1,8 +1,9 @@
 var_variant="shrouded"; // ["shrouded", "plate", "no-thumb-cluster", "bottomPlate","mcuCap"]
 var_side="left"; // ["left","right"]
-var_show_assembly=true; //[true,false]
+var_with_cap=true; // [true,false]
+var_show_assembly=true; // [true,false]
 
-module switchPlate(mirror=false,variant) {
+module switchPlate(mirror=false,variant,justMCUCutout=false) {
     mirror(mirror ? [1,0,0] : [0,0,0]) {
         difference() {
             union() {
@@ -16,10 +17,10 @@ module switchPlate(mirror=false,variant) {
                                     difference() {
                                         coneH=4;
                                         minkowski() {
-                                            translate([0,0,-coneH/2])
-                                                linear_extrude(height = 10-coneH, center=true, convexity = 10)
+                                            linear_extrude(height = 10-coneH, center=true, convexity = 10)
                                                 import (file = "./svgs/case-boundary.svg");
-                                            cylinder(h=4, r1=2, r2=1);
+                                            translate([0,0,-coneH/2])
+                                                cylinder(h=coneH, r1=2, r2=1);
                                         }
                                         linear_extrude(height = 10, center=true, convexity = 10)
                                             import (file = "./svgs/case-boundary.svg");
@@ -42,8 +43,17 @@ module switchPlate(mirror=false,variant) {
                             }
                         }
 
-                        linear_extrude(height = 3, convexity = 10)
-                            import (file = "./svgs/mcu.svg");
+                        if (justMCUCutout) {
+                            linear_extrude(height = 3, convexity = 10)
+                                import (file = "./svgs/mcu.svg");
+                        } else {
+                            hull()
+                                for(t=[[-0.2,-0.2,-17],[10,-0.2,-17],[-0.2,10,-17]]) {
+                                    translate(t)
+                                        linear_extrude(height = 20, convexity = 10)
+                                        import (file = "./svgs/mcu.svg");
+                                }
+                        }
                         minkowski() {
                             union() {
                                 linear_extrude(height = 1.5, convexity = 10)
@@ -154,34 +164,66 @@ module bottomPlate(mirror=false, height=4.5) {
         }
 }
 
-module mcuCap(mirror=false, h=7) {
+module mcuCap(mirror=false, shroud=true, h=2) {
+    coneH=4;
+    mirror(mirror ? [1,0,0] : [0,0,0]) {
         difference() {
             union() {
-                minkowski() {
-                    translate([0,0,h])
-                        linear_extrude(height = 1, convexity = 10)
-                        import (file = "./svgs/mcu.svg");
-                    cylinder(r2=0.1,r1=1.1,h=1);
+                intersection() {
+                    union() {
+                        difference() {
+                            minkowski() {
+                                zCorrection = 1;
+                                translate([0,0,-zCorrection])
+                                    linear_extrude(height = 10+zCorrection-coneH + h, convexity = 10)
+                                    import (file = "./svgs/case-boundary.svg");
+                                if (shroud) {
+                                    translate([0,0,-coneH])
+                                        cylinder(h=coneH, r1=2, r2=1);
+                                }
+                            }
+                            translate([0,0,-10])
+                                linear_extrude(height = 10+3, convexity = 10)
+                                import (file = "./svgs/case-boundary.svg");
+                            intersection() {
+                                hull() {
+                                    minkowski() {
+                                        union() {
+                                            linear_extrude(height = 4+h, convexity = 10)
+                                                import (file = "./svgs/mcu-holes.svg");
+                                            translate([0,20,0])
+                                                linear_extrude(height = 4+h, convexity = 10)
+                                                import (file = "./svgs/mcu-holes.svg");
+                                        }
+                                        translate([0,0,-coneH])
+                                            cylinder(h=coneH, r1=1.1, r2=0.1);
+                                    }
+                                }
+                                if (shroud) {
+                                    linear_extrude(height = 30, convexity = 10)
+                                        import (file = "./svgs/mcu.svg");
+                                }
+                            }
+                        }
+                    }
+                    hull()
+                        for(t=(shroud ? [[0,0,-10],[10,0,-10],[0,10,-10]] : [[0,0,-10]])) {
+                            translate(t)
+                                linear_extrude(height = 30, convexity = 10)
+                                import (file = "./svgs/mcu.svg");
+                        }
+
                 }
                 minkowski() {
-                    linear_extrude(height = h, convexity = 10)
+                    linear_extrude(height = 4+h, convexity = 10)
                         import (file = "./svgs/mcu-holes.svg");
-                    cylinder(r=1.5,h=2);
+                    cylinder(r=1.5,h=1,$fn=20);
                 }
             }
-            linear_extrude(height = h+2, convexity = 10)
+            linear_extrude(height = 6+h, convexity = 10)
                 import (file = "./svgs/mcu-holes.svg");
         }
-}
-
-if(var_variant == "bottomPlate") {
-    bottomPlate(var_side != "left");
-} else if(var_variant == "mcuCap") {
-    rotate($preview ? [0,0,0] : [180,0,0])
-        mcuCap(var_side != "left");
-} else {
-    rotate($preview ? [0,0,0] : [180,0,0])
-        switchPlate(var_side != "left", variant=var_variant);
+    }
 }
 
 /*
@@ -202,6 +244,24 @@ module pcb() {
     }
 }
 
+if(var_variant == "bottomPlate") {
+    bottomPlate(var_side != "left");
+} else {
+    rotate($preview ? [0,0,0] : [180,0,0]) {
+        switchPlate(var_side != "left", variant=var_variant);
+        if(var_with_cap) {
+            translate($preview ? [0,0,0] : [4,4,-3])
+                mcuCap(var_side != "left", var_variant == "shrouded");
+        }
+    }
+}
+
+/*
+###############################################################################
+###############################################################################
+###############################################################################
+*/
+
 
 if ($preview && var_show_assembly) {
     translate([200,0,0]) {
@@ -217,7 +277,7 @@ if ($preview && var_show_assembly) {
         render(convexity = 2)
             bottomPlate(var_side != "left");
         render(convexity = 2)
-            mcuCap(var_side != "left");
+            mcuCap(var_side != "left", var_variant=="shrouded");
     }
 }
 

@@ -8,6 +8,7 @@ build() (
         local stl="$(echo "$1" | cut -d':' -f1)"
         local variant="$(echo "$1" | cut -d':' -f2)"
         local side="$(echo "$1" | cut -d':' -f3)"
+        # local var_with_cap="$(echo "$1" | cut -d':' -f4)"
         set -x
         mkdir -p "$(dirname "$stl")"
         openscad --hardwarnings \
@@ -25,11 +26,9 @@ out/left.topCase.stl:shrouded:left
 out/left.topPlate.stl:plate:left
 #out/left.topPlate.no-thumb-cluster.stl:no-thumb-cluster:left
 out/left.bottomPlate.stl:bottomPlate:left
-out/left.mcuCap.stl:mcuCap:left
 out/right.topCase.stl:shrouded:right
 out/right.topPlate.stl:plate:right
 #out/right.topPlate.no-thumb-cluster.stl:no-thumb-cluster:right
 out/right.bottomPlate.stl:bottomPlate:right
-out/right.mcuCap.stl:mcuCap:right
 EOF
 

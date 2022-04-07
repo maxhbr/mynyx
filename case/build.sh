@@ -8,6 +8,9 @@ build() (
         local stl="$(echo "$1" | cut -d':' -f1)"
         local variant="$(echo "$1" | cut -d':' -f2)"
         local side="$(echo "$1" | cut -d':' -f3)"
+        if [[ -z "$side" ]]; then
+            side="left"
+        fi
         local var_with_cap="$(echo "$1" | cut -d':' -f4)"
         if [[ -z "$var_with_cap" ]]; then
             var_with_cap=true
@@ -16,8 +19,8 @@ build() (
         mkdir -p "$(dirname "$stl")"
         openscad --hardwarnings \
             -o "$stl" \
-            -D var_side="\"$side\"" \
             -D var_variant="\"$variant\"" \
+            -D var_side="\"$side\"" \
             -D var_with_cap="$var_with_cap" \
             "./v1.scad"
     fi

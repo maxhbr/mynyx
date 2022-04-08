@@ -258,7 +258,7 @@ if(var_variant == "bottomPlate") {
         switchPlate(var_side != "left", variant=var_variant);
         if(var_with_cap) {
             translate($preview ? [0,0,0] : [4,4,-3])
-                mcuCap(var_side != "left", var_variant == "shrouded");
+                mcuCap(var_side != "left", false); // var_variant == "shrouded");
         }
     }
 }

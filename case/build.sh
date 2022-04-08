@@ -29,11 +29,11 @@ build() (
 export -f build
 
 cat <<EOF | parallel --progress build {} 1>&2
-out/left.topCase.stl:shrouded:left:false
+out/left.topCase.stl:shrouded:left:true
 out/left.topPlate.stl:plate:left:true
 #out/left.topPlate.no-thumb-cluster.stl:no-thumb-cluster:left
 out/left.bottomPlate.stl:bottomPlate:left
-out/right.topCase.stl:shrouded:right:false
+out/right.topCase.stl:shrouded:right:true
 out/right.topPlate.stl:plate:right:true
 #out/right.topPlate.no-thumb-cluster.stl:no-thumb-cluster:right
 out/right.bottomPlate.stl:bottomPlate:right

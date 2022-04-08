@@ -7,8 +7,10 @@ cd "$(dirname "$0")"
 
 writeVersionScad() {
     local scad="$1"
+    local commits="$(git log --follow --oneline "$scad" | wc -l)"
+    local modified="$(git diff --exit-code "$scad" &>/dev/null || echo "m")"
     cat <<EOF > _version.scad
-git_commit_count="v$(git log --oneline "$scad" | wc -l)";
+git_commit_count="v${commits}${modified}";
 EOF
     git add _version.scad
 }
@@ -63,7 +65,7 @@ export -f build
 ##  run  ######################################################################
 ###############################################################################
 
-scad="v1.scad"
+scad="nyx.scad"
 
 writeVersionScad "$scad"
 cat <<EOF | parallel --progress build "$scad" {} 1>&2

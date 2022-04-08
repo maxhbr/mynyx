@@ -8,7 +8,6 @@ cd "$(dirname "$0")"
 writeVersionScad() {
     local scad="$1"
     cat <<EOF > _version.scad
-git_describe="$(git describe --tags --abbrev=2)";
 git_commit_count="v$(git log --oneline "$scad" | wc -l)";
 EOF
     git add _version.scad

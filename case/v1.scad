@@ -3,7 +3,7 @@ var_side="left"; // ["left","right"]
 var_with_cap=true; // [true,false]
 var_show_assembly=true; // [true,false]
 
-module switchPlate(mirror=false,variant,justMCUCutout=false) {
+module switchPlate(mirror=false,variant) {
     mirror(mirror ? [1,0,0] : [0,0,0]) {
         difference() {
             union() {
@@ -47,17 +47,12 @@ module switchPlate(mirror=false,variant,justMCUCutout=false) {
                             }
                         }
 
-                        if (justMCUCutout) {
-                            linear_extrude(height = 3, convexity = 10)
-                                import (file = "./svgs/mcu.svg");
-                        } else {
-                            hull()
-                                for(t=[[-0.2,-0.2,-17],[10,-0.2,-17],[-0.2,10,-17]]) {
-                                    translate(t)
-                                        linear_extrude(height = 20, convexity = 10)
-                                        import (file = "./svgs/mcu.svg");
-                                }
-                        }
+                        hull()
+                            for(t=[[-0.2,-0.2,-17],[10,-0.2,-17],[-0.2,10,-17]]) {
+                                translate(t)
+                                    linear_extrude(height = 20, convexity = 10)
+                                    import (file = "./svgs/mcu.svg");
+                            }
                         minkowski() {
                             union() {
                                 linear_extrude(height = 1.5, convexity = 10)
@@ -70,8 +65,11 @@ module switchPlate(mirror=false,variant,justMCUCutout=false) {
                             translate([0,0,-1])
                                 cylinder(r=1.7,h=1,$fn=20);
                         }
-                        linear_extrude(height = 5, convexity = 10)
-                            import (file = "./svgs/switches.svg");
+                        minkowski() {
+                            linear_extrude(height = 5, convexity = 10)
+                                import (file = "./svgs/switches.svg");
+                            cylinder(r=0.08,h=0.1,$fn=8);
+                        }
                     }
                 }
                 minkowski() {
@@ -196,10 +194,10 @@ module mcuCap(mirror=false, shroud=true, h=2) {
                                 hull() {
                                     minkowski() {
                                         union() {
-                                            linear_extrude(height = 4+h, convexity = 10)
+                                            linear_extrude(height = 4.5+h, convexity = 10)
                                                 import (file = "./svgs/mcu-holes.svg");
                                             translate([0,20,0])
-                                                linear_extrude(height = 4+h, convexity = 10)
+                                                linear_extrude(height = 4.5+h, convexity = 10)
                                                 import (file = "./svgs/mcu-holes.svg");
                                         }
                                         translate([0,0,-coneH])

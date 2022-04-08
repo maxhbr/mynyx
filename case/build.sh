@@ -1,7 +1,16 @@
 #!/usr/bin/env nix-shell
-#! nix-shell -i bash -p parallel openscad
+#! nix-shell -i bash -p parallel openscad git
 
 set -euo pipefail
+
+writeVersionScad() {
+    cat <<EOF > _version.scad
+git_describe="$(git describe --tags --abbrev=2)";
+git_commit_count="#C=$(git log --oneline "v1.scad" | wc -l)";
+EOF
+    git add _version.scad
+}
+writeVersionScad
 
 build() (
     if [[ "$1" && "$1" != "#"* ]]; then
@@ -17,12 +26,21 @@ build() (
         fi
         set -x
         mkdir -p "$(dirname "$stl")"
+        mkdir -p "ast/$(dirname "$stl")"
+
+        openscad --hardwarnings \
+            -o "ast/${stl%.*}.ast" \
+            -D var_variant="\"$variant\"" \
+            -D var_side="\"$side\"" \
+            -D var_with_cap="$var_with_cap" \
+            "v1.scad"
+
         openscad --hardwarnings \
             -o "$stl" \
             -D var_variant="\"$variant\"" \
             -D var_side="\"$side\"" \
             -D var_with_cap="$var_with_cap" \
-            "./v1.scad"
+            "v1.scad"
     fi
 )
 

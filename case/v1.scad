@@ -1,3 +1,5 @@
+include <_version.scad>;
+
 var_variant="shrouded"; // ["shrouded", "plate", "no-thumb-cluster", "bottomPlate"]
 var_side="left"; // ["left","right"]
 var_with_cap=true; // [true,false]
@@ -98,6 +100,14 @@ module switchPlate(mirror=false,variant) {
                             size = 6.5,
                             halign = "center");
             }
+            color("red")
+                translate([138,45,2.3])
+                rotate([0,180,-135])
+                linear_extrude(0.31)
+                text(git_commit_count,
+                        font = "Roboto Condensed:style=bold",
+                        size = 4.5,
+                        halign = "left");
         }
     }
 }
@@ -152,6 +162,14 @@ module bottomPlate(mirror=false, height=4.5) {
                             font = "Roboto Condensed:style=bold",
                             size = 6.5,
                             halign = "center");
+                color("red")
+                    translate([138,130,1.2])
+                    rotate([0,0,-90])
+                    linear_extrude(0.31)
+                    text(git_commit_count,
+                            font = "Roboto Condensed:style=bold",
+                            size = 4.5,
+                            halign = "left");
             }
             difference() {
                 linear_extrude(height = 10, convexity = 10)
@@ -227,6 +245,14 @@ module mcuCap(mirror=false, shroud=true, h=2) {
             }
             linear_extrude(height = 6+h, convexity = 10)
                 import (file = "./svgs/mcu-holes.svg");
+            color("red")
+                translate([150,100,6.8])
+                rotate([0,180,-90])
+                linear_extrude(0.31)
+                text(git_commit_count,
+                        font = "Roboto Condensed:style=bold",
+                        size = 4.5,
+                        halign = "left");
         }
     }
 }
@@ -255,7 +281,7 @@ if(var_variant == "bottomPlate") {
     rotate($preview ? [0,0,0] : [180,0,0]) {
         switchPlate(var_side != "left", variant=var_variant);
         if(var_with_cap) {
-            translate($preview ? [0,0,0] : [4,4,-3])
+            translate($preview ? [0,0,0] : [var_side == "left" ?4 : -4,4,-3])
                 mcuCap(var_side != "left", false); // var_variant == "shrouded");
         }
     }

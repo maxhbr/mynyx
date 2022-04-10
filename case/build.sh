@@ -69,11 +69,11 @@ scad="nyx.scad"
 
 writeVersionScad "$scad"
 cat <<EOF | parallel --progress build "$scad" {} 1>&2
-out/left.topCase.stl:shrouded:left:true
-out/left.topPlate.stl:plate:left:true
-out/left.bottomPlate.stl:bottomPlate:left
-out/right.topCase.stl:shrouded:right:true
-out/right.topPlate.stl:plate:right:true
-out/right.bottomPlate.stl:bottomPlate:right
+out/nyx.left.topCase.stl:shrouded:left:true
+out/nyx.left.topPlate.stl:plate:left:true
+out/nyx.left.bottomPlate.stl:bottomPlate:left
+out/nyx.right.topCase.stl:shrouded:right:true
+out/nyx.right.topPlate.stl:plate:right:true
+out/nyx.right.bottomPlate.stl:bottomPlate:right
 EOF
 
